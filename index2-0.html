@@ -238,7 +238,15 @@
             
             // If condition for when user is logged in
             if (UserLoggedIn == true) {
-                // Action to be implemented here
+                Genesys("command", "Launcher.show",
+                    {},
+                    function() {
+                    /*fulfilled callback*/
+                    },
+                    function() {
+                    /*rejected callback*/
+                    }
+                );
             }
         }
 
