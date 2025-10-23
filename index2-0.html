@@ -226,6 +226,38 @@
             color: #999;
         }
     </style>
+    <script>
+        // Global variables
+        let UserLoggedIn = false;
+        let Language = 'English';
+
+        // Function to update user login status
+        function updateUserStatus() {
+            const userName = document.getElementById('userName').value;
+            UserLoggedIn = userName !== '';
+            
+            // If condition for when user is logged in
+            if (UserLoggedIn == true) {
+                // Action to be implemented here
+            }
+        }
+
+        // Function to update language
+        function updateLanguage() {
+            Language = document.getElementById('language').value;
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners
+            document.getElementById('userName').addEventListener('change', updateUserStatus);
+            document.getElementById('language').addEventListener('change', updateLanguage);
+            
+            // Initialize variables
+            updateUserStatus();
+            updateLanguage();
+        });
+    </script>
     <script type="text/javascript" charset="utf-8">
   (function (g, e, n, es, ys) {
     g['_genesysJs'] = e;
@@ -261,6 +293,7 @@
         <div class="nav-right">
             <span>Hello</span>
             <select id="userName">
+                <option value="">Select User</option>
                 <option value="John Smith">John Smith</option>
                 <option value="Pierre Cardin">Pierre Cardin</option>
                 <option value="Jan De Jong">Jan De Jong</option>
