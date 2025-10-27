@@ -231,7 +231,7 @@
         let UserLoggedIn = false;
         let Language = 'English';
 
-        Genesys("subscribe", "Launcher.ready", function(){});
+        Genesys("subscribe", "Launcher.ready");
         // Function to update user login status
         function updateUserStatus() {
             const userName = document.getElementById('userName').value;
@@ -245,10 +245,10 @@
             if (UserLoggedIn == true) {
                 console.log('## DEBUG ✓ User is logged in - executing logged in actions');
                 // Action to be implemented here
-                Genesys("command", "Launcher.show", {}, function() {        /*fulfilled callback*/    },    function() {        /*rejected callback*/    });
+                Genesys("command", "Launcher.show");
             } else {
                 console.log('## DEBUG ✗ User is not logged in');
-                Genesys("command", "Launcher.hide", {}, function() {         /*fulfilled callback*/     },     function() {         /*rejected callback*/     } );
+                Genesys("command", "Launcher.hide");
             }
         }
 
