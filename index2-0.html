@@ -232,14 +232,16 @@
         let Language = 'English';
 
         // Genesys("subscribe", "Launcher.ready");
-        Genesys("command", "Database.set", {
-          messaging: {
-            customAttributes: {
-              CustomerName: "",
-              CustomerLanguage: Language
-            }
-          }
-        });
+        //Genesys("command", "Database.set", {
+        //  messaging: {
+        //    customAttributes: {
+        //      "CustomerName": "",
+        //      "CustomerLanguage": Language
+        //    }
+        //  }
+        //});
+        Genesys('command', 'Database.set', {
+            messaging: { customAttributes: { "CustomerName": "", "CustomerLanguage": Language}}},function() {console.log("## DEBUG customAttributes SET SUCCESS")},function() {console.log("## DEBUG customAttributes SET FAILED")});
         // Function to update user login status
         function updateUserStatus() {
             const userName = document.getElementById('userName').value;
@@ -254,23 +256,13 @@
                 console.log('## DEBUG ✓ User is logged in - executing logged in actions');
                 // Action to be implemented here
                 Genesys("command", "Launcher.show");
-                Genesys("command", "Database.update", {
-                  messaging: {
-                    customAttributes: {
-                      CustomerName: userName
-                    }
-                  }
-                });
+                Genesys('command', 'Database.update', {
+                    messaging: { customAttributes: { "CustomerName": ""}}},function() {console.log("## DEBUG customAttributes UPDATE SUCCESS")},function() {console.log("## DEBUG customAttributes UPDATE FAILED")});
             } else {
                 console.log('## DEBUG ✗ User is not logged in');
                 Genesys("command", "Launcher.hide");
-                Genesys("command", "Database.update", {
-                  messaging: {
-                    customAttributes: {
-                      CustomerName: userName
-                    }
-                  }
-                });
+                Genesys('command', 'Database.update', {
+                    messaging: { customAttributes: { "CustomerName": ""}}},function() {console.log("## DEBUG customAttributes UPDATE SUCCESS")},function() {console.log("## DEBUG customAttributes UPDATE FAILED")});
             }
         }
 
@@ -278,13 +270,9 @@
         function updateLanguage() {
             Language = document.getElementById('language').value;
             console.log('## DEBUG Language Updated:', Language);
-            Genesys("command", "Database.update", {
-               messaging: {
-                 customAttributes: {
-                   CustomerLanguage: Language
-                 }
-               }
-             });
+                Genesys('command', 'Database.update', {
+                    messaging: { customAttributes: { "CustomerLanguage": Language}}},function() {console.log("## DEBUG customAttributes UPDATE SUCCESS")},function() {console.log("## DEBUG customAttributes UPDATE FAILED")});
+
         }
 
         // Initialize on page load
