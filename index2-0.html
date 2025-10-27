@@ -261,12 +261,12 @@
                 // Action to be implemented here
                 Genesys("command", "Launcher.show");
                 console.log('## DEBUG Genesys: Launcher shown');
-                Genesys("command", "Database.update", { messaging: { customAttributes: { CustomerName: {{userName}} }}});
+                Genesys("command", "Database.update", { messaging: { customAttributes: { CustomerName: userName }}});
             } else {
                 console.log('## DEBUG ✗ User is not logged in');
                 Genesys("command", "Launcher.hide");
                 console.log('## DEBUG Genesys: Launcher hidden');
-                Genesys("command", "Database.update", { messaging: { customAttributes: { CustomerName: '' }}});
+                Genesys("command", "Database.update", { messaging: { customAttributes: { CustomerName: userName }}});
             }
         }
 
@@ -274,7 +274,7 @@
         function updateLanguage() {
             Language = document.getElementById('language').value;
             
-            Genesys("command", "Database.update", { messaging: { customAttributes: { CustomerLanguage: {{Language}} }}});
+            Genesys("command", "Database.update", { messaging: { customAttributes: { CustomerLanguage: Language }}});
             console.log('## DEBUG Language Updated:', Language);
         }
 
