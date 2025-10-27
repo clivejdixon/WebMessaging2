@@ -239,7 +239,7 @@
         function updateUserStatus() {
             const userName = document.getElementById('userName').value;
             UserLoggedIn = userName !== '';
-            Genesys("command", "Database.set", { messaging: { customAttributes: { CustomerName: {{userName}} } } });
+            // Genesys("command", "Database.set", { messaging: { customAttributes: { CustomerName: {{userName}} } } });
             
             console.log('## DEBUG User Status Updated:');
             console.log('## DEBUG - Selected User:', userName);
