@@ -230,7 +230,6 @@
         // Global variables
         let UserLoggedIn = false;
         let Language = 'English';
-        let genesysReady = false;
 
         // Function to update user login status
         function updateUserStatus() {
@@ -245,16 +244,12 @@
             if (UserLoggedIn == true) {
                 console.log('## DEBUG ✓ User is logged in - executing logged in actions');
                 // Action to be implemented here
-                if (genesysReady && typeof Genesys !== 'undefined') {
-                    Genesys("command", "Launcher.show");
-                    console.log('## DEBUG Genesys: Launcher shown');
-                }
+                Genesys("command", "Launcher.show");
+                console.log('## DEBUG Genesys: Launcher shown');
             } else {
                 console.log('## DEBUG ✗ User is not logged in');
-                if (genesysReady && typeof Genesys !== 'undefined') {
-                    Genesys("command", "Launcher.hide");
-                    console.log('## DEBUG Genesys: Launcher hidden');
-                }
+                Genesys("command", "Launcher.hide");
+                console.log('## DEBUG Genesys: Launcher hidden');
             }
         }
 
@@ -268,6 +263,21 @@
         window.addEventListener('DOMContentLoaded', function() {
             console.log('## DEBUG === Finance Answers Page Loaded ===');
             
+            // Try to set Genesys database - wrapped in try/catch to prevent errors
+            try {
+                console.log('## DEBUG Attempting to set Genesys database...');
+                Genesys("command", "Database.set", {
+                    messaging: {
+                        customAttributes: {
+                            department: "Support"
+                        }
+                    }
+                });
+                console.log('## DEBUG Genesys database set successfully');
+            } catch (error) {
+                console.log('## DEBUG Error setting Genesys database:', error.message);
+            }
+            
             // Add event listeners
             document.getElementById('userName').addEventListener('change', updateUserStatus);
             document.getElementById('language').addEventListener('change', updateLanguage);
@@ -277,16 +287,6 @@
             updateUserStatus();
             updateLanguage();
         });
-
-        // Wait for Genesys to be ready
-        if (typeof Genesys !== 'undefined') {
-            Genesys("subscribe", "Launcher.ready", function() {
-                console.log('## DEBUG Genesys: Launcher ready');
-                genesysReady = true;
-                Genesys("command", "Database.set", {messaging: {customAttributes: {department: "Support"}}});
-                console.log('## DEBUG Genesys: Database initialized with department');
-            });
-        }
     </script>
     <script type="text/javascript" charset="utf-8">
   (function (g, e, n, es, ys) {
