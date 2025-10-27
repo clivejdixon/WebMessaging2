@@ -236,31 +236,35 @@
             const userName = document.getElementById('userName').value;
             UserLoggedIn = userName !== '';
             
+            console.log('## DEBUG User Status Updated:');
+            console.log('## DEBUG - Selected User:', userName);
+            console.log('## DEBUG - UserLoggedIn:', UserLoggedIn);
+            
             // If condition for when user is logged in
             if (UserLoggedIn == true) {
-                Genesys("command", "Launcher.show", {},
-                    function() {
-                    /*fulfilled callback*/
-                    },
-                    function() {
-                    /*rejected callback*/
-                    }
-                );
+                console.log('## DEBUG ✓ User is logged in - executing logged in actions');
+                // Action to be implemented here
+            } else {
+                console.log('## DEBUG ✗ User is not logged in');
             }
         }
 
         // Function to update language
         function updateLanguage() {
             Language = document.getElementById('language').value;
+            console.log('## DEBUG Language Updated:', Language);
         }
 
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', function() {
+            console.log('## DEBUG === Finance Answers Page Loaded ===');
+            
             // Add event listeners
             document.getElementById('userName').addEventListener('change', updateUserStatus);
             document.getElementById('language').addEventListener('change', updateLanguage);
             
             // Initialize variables
+            console.log('## DEBUG Initializing variables...');
             updateUserStatus();
             updateLanguage();
         });
