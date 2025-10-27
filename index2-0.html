@@ -232,6 +232,14 @@
         let Language = 'English';
 
         // Genesys("subscribe", "Launcher.ready");
+        Genesys("command", "Database.set", {
+          messaging: {
+            customAttributes: {
+              CustomerName: "",
+              CustomerLanguage: Language
+            }
+          }
+        });
         // Function to update user login status
         function updateUserStatus() {
             const userName = document.getElementById('userName').value;
@@ -246,9 +254,23 @@
                 console.log('## DEBUG ✓ User is logged in - executing logged in actions');
                 // Action to be implemented here
                 Genesys("command", "Launcher.show");
+                Genesys("command", "Database.update", {
+                  messaging: {
+                    customAttributes: {
+                      CustomerName: userName
+                    }
+                  }
+                });
             } else {
                 console.log('## DEBUG ✗ User is not logged in');
                 Genesys("command", "Launcher.hide");
+                Genesys("command", "Database.update", {
+                  messaging: {
+                    customAttributes: {
+                      CustomerName: userName
+                    }
+                  }
+                });
             }
         }
 
@@ -256,6 +278,13 @@
         function updateLanguage() {
             Language = document.getElementById('language').value;
             console.log('## DEBUG Language Updated:', Language);
+            Genesys("command", "Database.update", {
+               messaging: {
+                 customAttributes: {
+                   CustomerLanguage: Language
+                 }
+               }
+             });
         }
 
         // Initialize on page load
