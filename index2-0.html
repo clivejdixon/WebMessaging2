@@ -272,6 +272,13 @@
         function updateLanguage() {
             Language = document.getElementById('language').value;
             console.log('## DEBUG Language Updated:', Language);
+            Genesys("command", "Database.update", {
+                    messaging: {
+                        customAttributes: {
+                            CustomerLanguage: Language
+                        }
+                    }
+                });
         }
 
         // Initialize on page load
@@ -284,7 +291,9 @@
                 Genesys("command", "Database.set", {
                     messaging: {
                         customAttributes: {
-                            department: "Support"
+                            department: "Support",
+                            CustomerLanguage: "English",
+                            CustomerName: ""
                         }
                     }
                 });
